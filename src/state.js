@@ -1,4 +1,4 @@
 export const state = {
-  projects: [],
-  activeProject: null
+  arr: [],
+  activeDisplay: null
 };
