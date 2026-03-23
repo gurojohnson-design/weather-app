@@ -1,5 +1,6 @@
 const searchBtn = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
+const content = document.getElementById('content');
 
 
 async function getWeather(location) {
@@ -11,26 +12,24 @@ async function getWeather(location) {
         renderDOM(response);
 
         console.log(response);
-        console.log(response.resolvedAddress);
         return response;
     } catch (error) {
     console.log('Catch error: ', error);
 }
 };
 
-getWeather('london');
+getWeather('new york, NY');
 
 searchBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  searchBar.value = '';
+    e.preventDefault();
+    content.textContent = '';
+    getWeather(searchBar.value);
+    searchBar.value = '';
 });
 
 // create dom
 function renderDOM(response) {
     // time for background display, location, verbal description, temp, feels like temp, wind, humidity
-
-    const content = document.getElementById('content');
 
     const location = document.createElement('div') ;
     location.id = 'location';
@@ -42,19 +41,19 @@ function renderDOM(response) {
 
     const temp = document.createElement('div');
     temp.id = 'temp';
-    temp.textContent = `${response.currentConditions.temp} \u00B0F`;
+    temp.textContent = `Temperature: ${response.currentConditions.temp} \u00B0F`;
 
     const feelsLike = document.createElement('div');
     feelsLike.id = 'feelsLike';
-    feelsLike.textContent = `${response.currentConditions.feelslike} \u00B0F`;
+    feelsLike.textContent = `Feels Like: ${response.currentConditions.feelslike} \u00B0F`;
 
     const wind = document.createElement('div');
     wind.id = 'wind';
-    wind.textContent = `${response.currentConditions.windspeed} mph`;
+    wind.textContent = `Wind: ${response.currentConditions.windspeed} mph`;
 
     const humidity = document.createElement('div');
     humidity.id = 'humidity';
-    humidity.textContent = `${response.currentConditions.humidity}%`;
+    humidity.textContent = `Humidity: ${response.currentConditions.humidity}%`;
 
     content.append(location, verbDesc, temp, feelsLike, wind, humidity);
 }
