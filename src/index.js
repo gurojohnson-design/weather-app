@@ -1,3 +1,7 @@
+import "./styles.css"
+
+
+
 const searchBtn = document.getElementById('searchBtn');
 const searchBar = document.getElementById('searchBar');
 const content = document.getElementById('content');
@@ -41,7 +45,7 @@ function renderDOM(response) {
 
     const temp = document.createElement('div');
     temp.id = 'temp';
-    temp.textContent = `Temperature: ${response.currentConditions.temp} \u00B0F`;
+    temp.textContent = `${response.currentConditions.temp} \u00B0F`;
 
     const feelsLike = document.createElement('div');
     feelsLike.id = 'feelsLike';
